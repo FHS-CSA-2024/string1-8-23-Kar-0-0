@@ -1,5 +1,4 @@
-package src.main.java;
-
+ 
 
 public class String1
 {
@@ -39,7 +38,8 @@ public class String1
      *  helloName("X") → "Hello X!"
      */
     public String helloName(String name) {
-        return unimplemented;
+        //return unimplemented;
+        return "Hello " + name + "!";
     }
 
     /*
@@ -50,8 +50,8 @@ public class String1
      * makeAbba("What", "Up") → "WhatUpUpWhat"
      */
     public String makeAbba(String a, String b) {
-        return unimplemented;
-    }
+        return a + b + b + a;
+    }   
 
     /*
      * The web is built with HTML strings like "<i>Yay</i>" which draws Yay as italic text. 
@@ -62,7 +62,7 @@ public class String1
      * makeTags("cite", "Yay") → "<cite>Yay</cite>"
      */
     public String makeTags(String tag, String word) {
-        return unimplemented;
+        return "<" + tag + ">" + word + "</" + tag + ">";
     }
 
     /*
@@ -76,7 +76,7 @@ public class String1
      * makeOutWord("[[]]", "word") → "[[word]]"
      */
     public String makeOutWord(String out, String word) {
-        return unimplemented;
+        return out.substring(0, 2) + word + out.substring(2, 4);
     }
 
     /*
@@ -87,7 +87,8 @@ public class String1
      * extraEnd("Hi") → "HiHiHi"
      */
     public String extraEnd(String str) {
-        return unimplemented;
+        String lastTwo = str.substring(str.length()-2, str.length());
+        return lastTwo + lastTwo + lastTwo;
     }
 
     /*
@@ -100,7 +101,11 @@ public class String1
      * firstTwo("ab") → "ab"
      */
     public String firstTwo(String str) {
-        return unimplemented;
+        if (str.length() < 2){
+            return str;
+        }else{
+            return str.substring(0, 2);
+        }
     }
 
     /*
@@ -110,7 +115,7 @@ public class String1
      * firstHalf("abcdef") → "abc"
      */
     public String firstHalf(String str) {
-        return unimplemented;
+        return str.substring(0, (str.length()/ 2));
     }
 
     /*
@@ -121,7 +126,7 @@ public class String1
      * withoutEnd("coding") → "odin"
      */
     public String withoutEnd(String str) {
-        return unimplemented;
+        return str.substring(1, str.length() - 1);
     }
 
     /*
@@ -133,7 +138,11 @@ public class String1
      * comboString("aaa", "b") → "baaab"
      */
     public String comboString(String a, String b) {
-        return unimplemented;
+        if (a.length() < b.length()){
+            return a + b + a;
+        }else{
+            return b + a + b;
+        }
     }
 
     /*
@@ -144,7 +153,12 @@ public class String1
      * middleThree("solving") → "lvi"
      */
     public String middleThree(String str) {
-        return unimplemented;
+        if (str.length() <= 3){
+            return str;
+        }else{
+            int index = ((str.length() - 1) / 2) - 1;
+            return str.substring(index, index + 3);
+        }
     }
 
     /*
@@ -155,8 +169,13 @@ public class String1
      * extraFront("H") → "HHH"
      */
     public String extraFront(String str) {
-        return unimplemented;
-    }
+        if (str.length() < 2){
+            return str + str + str;
+        }else{
+            String finalstr = str.substring(0, 2); 
+            return finalstr + finalstr + finalstr;
+        }
+    };
 
     /*
      * Given a string, return a "rotated left 2" version where the first 2 chars are moved to the end. 
@@ -166,7 +185,10 @@ public class String1
      * left2("Hi") → "Hi"
      */
     public String left2(String str) {
-        return unimplemented;
+        String right = str.substring(2, str.length());
+        String lefttwo = str.substring(0, 2);
+        
+        return right + lefttwo;
     }
 
     /*
@@ -178,25 +200,42 @@ public class String1
      * hasBad("xxbadxx") → false
      */
     public boolean hasBad(String str) {
-        return false;
+        if (str.substring(0, 3).equals("bad")){
+            return true;
+        }else if(str.substring(1, 4).equals("bad")){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /*
      * Given two strings, append them together (known as "concatenation") and return the result. 
      * However, if the concatenation creates a double-char, then omit one of the chars, 
-     * 	so "abc" and "cat" yields "abcat".
+     *     so "abc" and "cat" yields "abcat".
      * conCat("abc", "cat") → "abcat"
      * conCat("dog", "cat") → "dogcat"
      * conCat("abc", "") → "abc"
      */
     public String conCat(String a, String b) {
-        return unimplemented;
+        String lastA = a.substring(a.length() - 1, a.length());
+        String lastB = b.substring(0, 1);
+        
+        if (a.length() < 1){
+            return b;
+        }else if (b.length() < 1){
+            return a;
+        }else if (lastA.equals(lastB)){
+            return a + b.substring(1, b.length());
+        }else{
+            return a + b + b;
+        }
     }
 
     /*
      *Given two strings, append them together (known as "concatenation") and return the result. 
      *However, if the strings are different lengths, omit chars from the longer string 
-     *	so it is the same length as the shorter string. 
+     *    so it is the same length as the shorter string. 
      *So "Hello" and "Hi" yield "loHi". 
      *The strings may be any length.
      *minCat("Hello", "Hi") → "loHi"
@@ -204,7 +243,14 @@ public class String1
      *minCat("java", "Hello") → "javaello"
      */
     public String minCat(String a, String b) {
-        return unimplemented;
+        if (a.length() > b.length()){
+            return a.substring(a.length() - b.length(), a.length()) + b;
+        }else if (a.length() < b.length()){
+            String bNew = b.substring(b.length() - a.length(), b.length());
+            return a + bNew;
+        }else {
+            return a + b;
+        }
     }
 
     /*
@@ -215,7 +261,7 @@ public class String1
      * withoutX("Hxix") → "Hxi"
      */
     public String withoutX(String str) {
-        return unimplemented;
+        
     }
 
     /*
